@@ -17,6 +17,8 @@ const data=[
 
 const StdViewPost = () => {
 const [finalData,setFinalData]=useState([])
+// const [valuej,setvaluej]=useState('')
+// console.log(valuej)
     const ContextUse=useContext(Context1)
     const {id,email}=ContextUse.location.state
     // const [info,setInfo]=useState('')
@@ -30,15 +32,20 @@ const [finalData,setFinalData]=useState([])
     //     })
         
     // }
-// const apply=(value)=>{
+const apply=(value,numEmp)=>{
     
-//     firebase.database().ref(`students/${id}/resume`).on('value',(data)=>{
-//                 const key=Object.keys(data.val())
-//                 const realData=data.val()[key]
-//                 firebase.database().ref(`admin/applied`).push(realData)
-//             })
+    console.log(value)
 
-// }
+    firebase.database().ref(`students/${id}/resume`).on('value',(data)=>{
+                const key=Object.keys(data.val())
+                const realData=data.val()[key]
+                realData ['jobTitle']=value
+                firebase.database().ref(`admin/applied`).push(realData)
+                firebase.database().ref(`company/allAppliedStudents/${numEmp}`).push(realData)
+            })
+
+
+}
 
     // const [status,setStatus]=useState('')
  useEffect(()=>{
@@ -104,11 +111,12 @@ setFinalData(array)
                             </span>
                       </span>
                       <span>
-                            <Typography  style={{height:90}}>{value.data.JobReqSkills}  </Typography>
+                            <Typography  style={{height:90}}>{value.data.JobReqSkills }  </Typography>
+                   
                          <img className='imgPost'  src={value.data.imgPreview} />
                       </span>
                       <br/>
-                      <Button fullWidth variant="contained" onClick={()=>alert('hello')} color="primary">{value.data.status===false ? 'Apply Now' : 'Applied' }</Button>
+                      <Button fullWidth variant="contained" onClick={()=>apply(value.data.JobReqSkills,value.empData.id)} color="primary">{value.data.status===false ? 'Apply Now' : 'Applied' }</Button>
                       </CardContent>
                   </Card>
               ))

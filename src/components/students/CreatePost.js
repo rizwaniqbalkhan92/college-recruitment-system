@@ -1,4 +1,4 @@
-import React,{useState,useContext} from 'react'
+import React,{useState,createContext,useContext} from 'react'
 import firebase from '../Database/Config'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -19,11 +19,16 @@ const useStyles = makeStyles((theme) => ({
     
   }));
 
+const ContextResume=createContext()
+
 
 
 const CreatePost = () => {
   const ContextUse=useContext(Context1)
   const {id,email}=ContextUse.location.state
+
+const [resume2,setResume2]=useState({})
+
   // =props.location.state
   const [fullName,setFullname]=useState('')
   const [fathername,setFathername]=useState('')
@@ -84,21 +89,23 @@ const createResume=()=>{
   }
 // const key=firebase.database().ref(`students/${id}/resume`).push().key
 
+setResume2(resume)
+
 firebase.database().ref(`students/${id}/resume`).push(resume)
 }
 
-firebase.database().ref(`students/${id}/resume`).on('value',(data)=>{
-  const key=Object.keys(data.val())
-  const dataBig=data.val()[key]
-  console.log(dataBig)
-})
+// firebase.database().ref(`students/${id}/resume`).on('value',(data)=>{
+//   const key=Object.keys(data.val())
+//   const dataBig=data.val()[key]
+//   console.log(dataBig)
+// })
 
 
 
     return (
         <div>
-          
-      <Paper  style={{width:1300,marginLeft:30,marginRight:30,marginTop:10,height:570}} elevation={3}  >
+     
+         <Paper  style={{width:1300,marginLeft:30,marginRight:30,marginTop:10,height:570}} elevation={3}  >
 {/* <Card style={{width:1000,marginLeft:150,height:500}}>
     <CardContent>
 <Typography>CREATE PROFILE</Typography>
@@ -173,6 +180,7 @@ firebase.database().ref(`students/${id}/resume`).on('value',(data)=>{
 </span>
 
       </Paper>
+
 
 
 
