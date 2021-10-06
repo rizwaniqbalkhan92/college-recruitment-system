@@ -3,7 +3,7 @@ import {BrowserRouter as Router , Route, Switch , Link , useHistory }  from 'rea
 import AdminSignUp from '../admin/AdminSignUp'
 import AdminLogin from '../admin/AdminLogin'
 import companiesLogin from '../companies/CompaniesLogin'
-import companiesSignUp from '../companies/companiesSignUp'
+import CompaniesSignUp from '../companies/companiesSignUp'
 import StudRouting from '../students/StudRouting'
 import StudentLogin from '../students/StudentLogin'
 import StudentSignUp from '../students/StudentSignUp'
@@ -23,7 +23,7 @@ return(
             <Route  path='/adminSignUp' component={AdminSignUp}  />
             <Route  path='/companiesLogin' component={companiesLogin}  />
             <Route  path='/company' component={CompaniesRoutes}  />
-            <Route  path='/companiesSignUp' component={companiesSignUp}  />
+            <Route  path='/companiesSignUp' component={CompaniesSignUp}  />
         </Switch>
     </Router>
 )

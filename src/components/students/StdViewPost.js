@@ -34,12 +34,14 @@ const [finalData,setFinalData]=useState([])
     // }
 const apply=(value,numEmp)=>{
     
-    console.log(value)
+   
 
     firebase.database().ref(`students/${id}/resume`).on('value',(data)=>{
                 const key=Object.keys(data.val())
                 const realData=data.val()[key]
                 realData ['jobTitle']=value
+                console.log(realData)
+                console.log(numEmp)
                 firebase.database().ref(`admin/applied`).push(realData)
                 firebase.database().ref(`company/allAppliedStudents/${numEmp}`).push(realData)
             })
@@ -61,17 +63,19 @@ for(var i=0; i<keys.length; i++){
     // setInfo(dataReal.id)
     
     
-    if(dataReal){
+    // if(dataReal && dataReal.id && dataReal !==undefined && dataReal!==null){
         
         firebase.database().ref(`company/emp_ids/${dataReal.id}`).on('value',(dataInfo)=>{
-            const key=Object.keys(dataInfo.val())
-            const empData=dataInfo.val()[key]
-            const obj={data:dataReal,key:key,empData:empData}
-            array.push(obj)
+            
+                const key=Object.keys(dataInfo.val())
+                const empData=dataInfo.val()[key]
+                const obj={data:dataReal,key:key,empData:empData}
+                array.push(obj)
+           
             // setInfoData(empData)
             
         })
-    }
+    // }
   
 
 }
@@ -98,7 +102,7 @@ setFinalData(array)
 
 <Paper elevation={3}  style={{height:592,overflow:'auto'}}>
 
-          {
+          {finalData ?
             finalData.map((value)=>(
                   <Card className='viewPost' style={{height:450,width:500 }}>
                       <CardContent>
@@ -119,7 +123,7 @@ setFinalData(array)
                       <Button fullWidth variant="contained" onClick={()=>apply(value.data.JobReqSkills,value.empData.id)} color="primary">{value.data.status===false ? 'Apply Now' : 'Applied' }</Button>
                       </CardContent>
                   </Card>
-              ))
+              )) : <h2>Loading....</h2>
           }
 </Paper>
         </>

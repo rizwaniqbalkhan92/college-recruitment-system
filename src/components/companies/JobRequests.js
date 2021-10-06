@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import firebase from "../Database/Config";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -10,7 +10,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import { Modal, CardContent, Card, Typography } from "@material-ui/core";
-
+import { CompanyContext } from './CompaniesRoutes'
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -129,61 +129,75 @@ const rows = [
 ];
 
 const JobRequests = () => {
+  const context = useContext(CompanyContext)
+  let id2 = context.location.state.id
+  console.log(id2)
   const classes = useStyles();
   const [allStdApp, setAllStdApp] = useState([]);
   const [open, setOpen] = useState({ value: false, obj: { name: "" } });
-
+  
+ 
   useEffect(() => {
-    firebase
-      .database()
-      .ref(`company/allAppliedStudents/${"KJ577BrjU2PsBEbfMLwc5HJRY9B3"}`)
-      .on("value", (data) => {
-        const dataEmp = data.val();
-        let keys = Object.keys(data.val());
-        var array = [];
-        if (dataEmp) {
-          for (var i = 0; i < keys.length; i++) {
-            const key = keys[i];
-            const data2 = dataEmp[key];
-            const obj = { data2, key };
-            array.push(obj);
-            setAllStdApp(array);
+    if (id2) {
+
+      firebase
+        .database()
+        .ref(`company/allAppliedStudents/${id2}`)
+        .on("value", (data) => {
+          const dataEmp = data.val();
+          let keys = Object.keys(data.val());
+          console.log(dataEmp)
+          var array = [];
+
+          if (dataEmp) {
+            for (var i = 0; i < keys.length; i++) {
+              const key = keys[i];
+              const data2 = dataEmp[key];
+              const obj = { data2, key };
+              array.push(obj);
+              setAllStdApp(array);
+            }
+          } else {
+            alert("empty....!");
           }
-        } else {
-          alert("empty....!");
-        }
-      });
-  }, []);
+        });
+
+    }
+  }, [id2]);
 
   return (
     <>
-      <TableContainer>
+      <TableContainer >
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
+             
               <TableCell align="right">Calories</TableCell>
               <TableCell align="right">Fat&nbsp;(g)</TableCell>
               <TableCell align="right">Carbs&nbsp;(g)</TableCell>
               <TableCell align="right">Protein&nbsp;(g)</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody   style={{height:100,overflow:'scroll'}}   >
             {allStdApp.map((row) => (
-          
+
               <TableRow>
-            
+
                 <TableCell component="th" scope="row">
                   {row.fullName}
                 </TableCell>
-                <TableCell align="right">{row.data2.cnic}</TableCell>
-                <TableCell align="right">{row.data2.email2}</TableCell>
-                <TableCell align="right">{row.data2.email2}</TableCell>
+                <img src={row.data2.image}  style={{width:50,height:50,marginTop:40}} />
+                <TableCell align="right">{row.data2.fullName}</TableCell>
+               
+                <TableCell align="right">{row.data2.jobTitle}</TableCell>
+                <TableCell align="right">{row.data2.responsibilities}</TableCell>
+           
+           
 
                 <Button
                   variant="outlined"
                   onClick={() =>
-                    setOpen({ value: true, obj:row})
+                    setOpen({ value: true, obj: '' })
                   }
                 >
                   View
@@ -195,7 +209,7 @@ const JobRequests = () => {
         </Table>
       </TableContainer>
       <Modal open={open.value}>
-      
+
         <Card className="modal">
           <Button
             variant="outlined"
@@ -210,27 +224,27 @@ const JobRequests = () => {
             <Typography
               style={{ fontWeight: "bolder", marginLeft: 30, marginTop: 20 }}
             >
-              Name: {open.obj.name}
+              Name: ''
             </Typography>
             <Typography
               style={{ fontWeight: "bolder", marginLeft: 30, marginTop: 20 }}
             >
-              Email Address: {open.obj.name}
+              Email Address: ''
             </Typography>
             <Typography
               style={{ fontWeight: "bolder", marginLeft: 30, marginTop: 20 }}
             >
-              Experience : {open.obj.name}
+              Experience : ''
             </Typography>
             <Typography
               style={{ fontWeight: "bolder", marginLeft: 30, marginTop: 20 }}
             >
-              Mobile #: {open.obj.name}
+              Mobile #: ''
             </Typography>
             <Typography
               style={{ fontWeight: "bolder", marginLeft: 30, marginTop: 20 }}
             >
-              Residential Add: {open.obj.name}
+              Residential Add:''
             </Typography>
           </CardContent>
         </Card>
