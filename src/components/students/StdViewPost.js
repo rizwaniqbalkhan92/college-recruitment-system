@@ -40,6 +40,7 @@ const apply=(value,numEmp)=>{
                 const key=Object.keys(data.val())
                 const realData=data.val()[key]
                 realData ['jobTitle']=value
+                realData ['key']=id
                 console.log(realData)
                 console.log(numEmp)
                 firebase.database().ref(`admin/applied`).push(realData)
@@ -53,8 +54,8 @@ const apply=(value,numEmp)=>{
  useEffect(()=>{
      
 firebase.database().ref(`company/createJob`).on('value',(datan)=>{
-    var keys=Object.keys(datan.val())
-    var dataUnformate=datan.val()
+    var keys=Object.keys(datan?.val())
+    var dataUnformate=datan?.val()
 if(keys){
 var array=[]
 for(var i=0; i<keys.length; i++){
@@ -63,25 +64,28 @@ for(var i=0; i<keys.length; i++){
     // setInfo(dataReal.id)
     
     
-    // if(dataReal && dataReal.id && dataReal !==undefined && dataReal!==null){
+    if(dataReal !==undefined && dataReal!==null){
         
-        firebase.database().ref(`company/emp_ids/${dataReal.id}`).on('value',(dataInfo)=>{
+
+
+
+         firebase.database().ref(`company/emp_ids/${dataReal?.id}`).on('value',(dataInfo)=>{
             
-                const key=Object.keys(dataInfo.val())
-                const empData=dataInfo.val()[key]
+                const key=Object?.keys(dataInfo?.val())
+                const empData=dataInfo?.val()[key]
                 const obj={data:dataReal,key:key,empData:empData}
                 array.push(obj)
            
             // setInfoData(empData)
             
         })
-    // }
+    }
   
 
 }
+
+
 setFinalData(array)
-
-
 }else{
     alert('sorry....')
 }

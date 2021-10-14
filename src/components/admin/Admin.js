@@ -57,11 +57,11 @@ const history=useHistory()
         <Switch>
             <Route exact path='/admin/allStud' component={StdApplied} />
            
-            <Route path='/admin/stdApplied' component={StdReject} />
+            <Route path='/admin/stdApplied' component={StdApplied} />
             <Route path='/admin/stdHire' component={StdHire} />
-            <Route path='/admin/stdReject' component={StdResumes} />
-            <Route path='/admin/stdPost' component={StdResumes} />
-            <Route path='/admin/stdResumes' component={StdPost} />
+            {/* <Route path='/admin/stdReject' component={StdRejects} /> */}
+            <Route path='/admin/stdPost' component={StdPost} />
+            <Route path='/admin/stdResumes' component={StdResumes} />
 
         </Switch>
     </CardContent>

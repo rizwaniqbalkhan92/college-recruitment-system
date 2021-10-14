@@ -25,14 +25,14 @@ const AllStudents = () => {
                 for (let i = 0; i < keys.length; i++) {
                     const key = keys[i]
                     let data3 = data2[key]
-                    let resKey = Object.keys(data3.resume)
+                    let resKey = Object?.keys(data3.resume)
 
                     if (resKey) {
 
 
                         for (let k = 0; k < resKey.length; k++) {
                             const keyFormatData = resKey[k]
-                            const dataFormatted = data3.resume[keyFormatData]
+                            const dataFormatted = data3?.resume[keyFormatData]
                             // console.log(dataFormatted)
                             // let obj = { data: dataFormatted, key: keyFormatData }
                             arr.push(dataFormatted)

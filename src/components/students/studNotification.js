@@ -1,4 +1,4 @@
-import React,{useContext}  from 'react'
+import React,{useContext,useState,useEffect}  from 'react'
 import {Card,Paper,CardContent,Typography}  from '@material-ui/core'
 import './std.css'
 import img1 from '../images/img1.jpg'
@@ -7,7 +7,9 @@ import firebase from '../Database/Config'
 
 const StudNotification = () => {
     const ContextUse=useContext(Context1)
-    const {id,email}=ContextUse.location.state
+    let {id,email}=ContextUse.location.state
+    const [array,setArray]=useState([])
+console.log(array)
 const num=[
     {num:1,img:img1},
     {num:2,img:img1},
@@ -15,23 +17,68 @@ const num=[
     {num:4,img:img1},
 ]
 
+const apply=()=>{
+    alert('........')
+}
+useEffect(()=>{
+
+    if(id){
+
+        firebase.database().ref(`students/${id}/notifications`).on('value',(dataNotification)=>{
+            let data=dataNotification?.val()
+            let dataKeys=Object?.keys(data)
+
+
+            if(data){
+                let arr=[]
+                for(let i=0; i<dataKeys?.length; i++){
+                    const dataKey2=dataKeys[i]
+                    const dataFormatted=data[dataKey2]
+                    const objData={dataFormatted,key:dataKey2}
+                    arr.push(objData)
+
+
+
+                }
+
+
+setArray(arr)
+            }
+
+
+
+
+
+
+        }
+    )
+}
+    else
+    {
+        alert('Please.. Wait')
+    }
+    
+    
+},[])
+
 
 
     return (<>
             <Typography>NOTIFICATIONS</Typography>
         <Paper className='paperNoti' elevation={3}>
 
-            {
-                num.map((value,ind)=>(
-                    <Card className='notifiCard' key={ind} onClick={()=>alert(value.num)}>
+            {array ?
+                array.map((value,ind)=>(
+                    <Card className='notifiCard' key={ind} onClick={()=>alert('...........')}>
                         <CardContent className='notifi'>
 
-              <img className='notiImages' src={value.img} />
-                            <Typography>{value.num}</Typography>
-                            {/* <button onClick={apply}>apply</button> */}
+              {/* <img className='notiImages' src={value?.dataFormatted?.img} /> */}
+                            <Typography>  {value.dataFormatted.emailJobCreator}</Typography>
+                            <Typography> Hello!    {value?.dataFormatted?.message}</Typography>
+                      
                         </CardContent>
                     </Card>
-                ))
+                )): <h1>Loading..........</h1>
             }
         </Paper></>
     )

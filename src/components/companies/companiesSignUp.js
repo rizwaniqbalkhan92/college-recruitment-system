@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
         .catch((error) => {
           var errorCode = error.code;
           var errorMessage = error.message;
-          alert('Sorry.. Ustaad')
+          alert('Sorry.. Invalid')
           // ..
         });
 }else{
