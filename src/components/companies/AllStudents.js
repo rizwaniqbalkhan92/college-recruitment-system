@@ -6,7 +6,7 @@ import './company.css'
 const AllStudents = () => {
     const [open, setOpen] = useState({ value: false, obj: { name: '' } })
     const [value1, setValue1] = useState([])
-// console.log(open)
+    // console.log(open)
 
     const data = [
         { image: img, name: 'rizwan', experience: 'this................this....' },
@@ -25,7 +25,11 @@ const AllStudents = () => {
                 for (let i = 0; i < keys.length; i++) {
                     const key = keys[i]
                     let data3 = data2[key]
-                    let resKey = Object?.keys(data3.resume)
+                    let resKey = []
+                    if (data3!==undefined && data3!==null){
+
+                        resKey = Object ? Object.keys(data3.resume): ''
+                    }
 
                     if (resKey) {
 
@@ -70,7 +74,7 @@ const AllStudents = () => {
             return (
 
 
-                <Card key={index}  className='card-std'  >
+                <Card key={index} className='card-std'  >
                     <CardContent className='allStdInfo'>
                         <img src={value.image} width='50px' height='50px' className='allStdImg' />
                         <Typography style={{ fontWeight: 'bolder', marginTop: 10, marginLeft: 10 }}>
@@ -79,12 +83,12 @@ const AllStudents = () => {
                         <Typography style={{ fontWeight: 'bolder', width: 300, marginTop: 10, marginLeft: 200 }}>
                             {value.email2}
                         </Typography>
-                        <Button onClick={() => setOpen({ value: true, obj:value  })} style={{ marginBottom: 10, marginLeft: 200 }} variant="contained" className='btnView' color="primary" >View</Button>
+                        <Button onClick={() => setOpen({ value: true, obj: value })} style={{ marginBottom: 10, marginLeft: 200 }} variant="contained" className='btnView' color="primary" >View</Button>
                     </CardContent>
                 </Card>
 
             )
-    })}
+        })}
 
 
 

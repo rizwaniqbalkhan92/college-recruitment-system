@@ -122,15 +122,15 @@ history.push('/studentLogin')
             </Button>
             <Grid container>
               <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="/AdminLogin" variant="body2">
                 {"Join as a Admin"}
               </Link><br/>
-            <Link href="#" variant="body2">
+            <Link href="/companiesLogin" variant="body2">
                 {"Join as a Company"}
               </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/studentLogin" variant="body2">
                   {"You have already account? Sign In"}
                 </Link>
               </Grid>

@@ -64,8 +64,8 @@ setArray(arr)
 
 
     return (<>
-            <Typography>NOTIFICATIONS</Typography>
-        <Paper className='paperNoti' elevation={3}>
+            <Typography style={{color:'green',fontSize:30}}  >NOTIFICATIONS</Typography>
+        <Paper className='paperNoti' elevation={3}   >
 
             {array ?
                 array.map((value,ind)=>(

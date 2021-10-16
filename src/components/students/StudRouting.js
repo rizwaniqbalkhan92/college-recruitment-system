@@ -1,6 +1,6 @@
 import React,{createContext} from 'react'
-import {Link,BrowserRouter as Router, Route, Switch}  from 'react-router-dom'
-
+import {Link,BrowserRouter as Router,useHistory ,Route, Switch}  from 'react-router-dom'
+import {Card}  from '@material-ui/core'
 import CreatePost from './CreatePost'
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import studNotification from './studNotification'
 import StdViewPost from './StdViewPost'
-
+import '../home.css'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,9 +27,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 export const Context1=createContext()
-
 const StudRouting = (props) => {
-    // console.log()
+  // console.log()
+  const history=useHistory()
     const classes = useStyles();
     return (
 
@@ -44,20 +44,20 @@ const StudRouting = (props) => {
  
           <Typography>{ props.location.state.email }</Typography>
             <Typography variant="h6" className={classes.title}>
-            <Link  to='/students/createPost' >Resume</Link>
+            <Link   style={{color:'white',textDecoration:'none'}} to='/students/createPost' >Resume</Link>
               
             </Typography>
             <Typography variant="h6" className={classes.title}>
-            <Link  to='/students/post' >Post</Link>
+            <Link style={{color:'white',textDecoration:'none'}}  to='/students/post' >Post</Link>
               
             </Typography>
             <Typography variant="h6" className={classes.title}>
-            <Link  to='/students/notification' >Notification</Link>
+            <Link style={{color:'white',textDecoration:'none'}}  to='/students/notification' >Notification</Link>
               
             </Typography>
 
             <Button color="inherit">
-            <Link  to='/studentLogin' >
+            <Link  style={{color:'white',textDecoration:'none'}} onClick={()=>history.push('/studentLogin')} >
             Logout
 
             </Link>
@@ -65,6 +65,7 @@ const StudRouting = (props) => {
           </Toolbar>
         
         </AppBar>
+        
         <Switch>
                
                 <Route   path='/students/createPost' component={CreatePost} />
@@ -74,7 +75,10 @@ const StudRouting = (props) => {
 
 
             </Switch>
+            
         </Router>
+
+
      </Context1.Provider>
       </div>
 

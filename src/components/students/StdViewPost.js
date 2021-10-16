@@ -46,7 +46,7 @@ const apply=(value,numEmp)=>{
                 firebase.database().ref(`admin/applied`).push(realData)
                 firebase.database().ref(`company/allAppliedStudents/${numEmp}`).push(realData)
             })
-
+alert('successfully applied')
 
 }
 
@@ -96,7 +96,7 @@ setFinalData(array)
 
 
 
- console.log(finalData)
+
 
 
 
@@ -106,7 +106,7 @@ setFinalData(array)
 
 <Paper elevation={3}  style={{height:592,overflow:'auto'}}>
 
-          {finalData ?
+          {finalData!==undefined && finalData !== null ?
             finalData.map((value)=>(
                   <Card className='viewPost' style={{height:450,width:500 }}>
                       <CardContent>

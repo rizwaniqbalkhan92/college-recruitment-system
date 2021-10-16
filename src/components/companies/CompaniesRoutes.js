@@ -1,6 +1,6 @@
 import React,{createContext} from 'react'
 import {Paper,Card,CardContent,Typography, Button}  from '@material-ui/core'
-import {Link,BrowserRouter as Router, Switch, Route}  from 'react-router-dom'
+import {Link,BrowserRouter as Router, Switch, Route,useHistory}  from 'react-router-dom'
 import './company.css'
 import AllStudents from '../companies/AllStudents'
 import img1 from '../images/img1.jpg'
@@ -8,9 +8,19 @@ import CreatePost from '../companies/CreatePost'
 import JobRequests from '../companies/JobRequests'
 import CompanyEmpId  from '../companies/CompanyEmpId'
 
+
 export const CompanyContext=createContext()
+
+
+
 const CompaniesRoutes = (props) => {
-    return (<>
+    const history=useHistory()
+  
+  
+  
+    return (
+    
+    <>
     <CompanyContext.Provider value={props}>
 
 <Router>
@@ -23,7 +33,7 @@ const CompaniesRoutes = (props) => {
 <br/>
 <Button variant="contained" color="primary">
 
-    <Link style={{color:'white'}} to='/regStudents'>Logout</Link>
+    <Link style={{color:'white'}} onClick={()=>history.push('/studentLogin')}>Logout</Link>
 
 </Button>
    <br/><br/>

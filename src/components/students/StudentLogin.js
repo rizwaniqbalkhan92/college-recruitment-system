@@ -118,15 +118,15 @@ const useStyles = makeStyles((theme) => ({
           </Button>
           <Grid container>
             <Grid item xs>
-            <Link href="#" variant="body2">
+            <Link href="/AdminLogin" variant="body2">
                 {"Join as a Admin"}
               </Link><br/>
-            <Link href="#" variant="body2">
+            <Link href="/companiesLogin" variant="body2">
                 {"Join as a Company"}
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/studentSignUp" variant="body2">
                 {`Don't have an account?
                    Create Account`}
               </Link>

@@ -2,7 +2,7 @@ import React,{useState,createContext,useContext} from 'react'
 import firebase from '../Database/Config'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import { CardContent ,TextField, Card, Typography, Button} from '@material-ui/core';
+import { CardContent ,TextField , Card, Typography, Button} from '@material-ui/core';
 import './std.css'
 import {Context1}  from './StudRouting'
 const useStyles = makeStyles((theme) => ({
@@ -91,7 +91,26 @@ const createResume=()=>{
 
 setResume2(resume)
 
-firebase.database().ref(`students/${id}/resume`).push(resume)
+firebase.database().ref(`students/${id}/resume`).push(resume).then(()=>{
+  setFullname('')
+setFathername('')
+setCnic('')
+setEmail('')
+setMobile('')
+setAddress('')
+setImage('')
+setCollege('')
+setLastDegree('')
+setIssueDate('')
+setExtraSkills('')
+setEduJourney('')
+setLastJob('')
+setCompany('')
+setStartDate('')
+setEndDate('')
+setResponsibilities('')
+setWorkingJourney('')
+})
 }
 
 // firebase.database().ref(`students/${id}/resume`).on('value',(data)=>{
@@ -117,14 +136,14 @@ firebase.database().ref(`students/${id}/resume`).push(resume)
 <Typography style={{marginTop:10}}>Personal Details</Typography>
 
 
-<TextField id="standard-basic"   onChange={e=>setFullname(e.target.value)}  label="Full Name" /><br/>
-<TextField id="standard-basic"   onChange={e=>setFathername(e.target.value)}  label="Father Name" /><br/>
-<TextField id="standard-basic"   onChange={e=>setCnic(e.target.value)}  label="CNIC #" /><br/>
-<TextField id="standard-basic"   onChange={e=>setEmail(e.target.value)}  label="Email Address" /><br/>
-<TextField id="standard-basic"   onChange={e=>setMobile(e.target.value)}  label="Mobile #" /><br/>
-<TextField id="standard-basic"   onChange={e=>setAddress(e.target.value)}  label="Residencial Address" /><br/>
+<TextField value={fullName} id="standard-basic"   onChange={e=>setFullname(e.target.value)}  label="Full Name" /><br/>
+<TextField value={fathername} id="standard-basic"   onChange={e=>setFathername(e.target.value)}  label="Father Name" /><br/>
+<TextField value={cnic} id="standard-basic"   onChange={e=>setCnic(e.target.value)}  label="CNIC #" /><br/>
+<TextField value={email2} id="standard-basic"   onChange={e=>setEmail(e.target.value)}  label="Email Address" /><br/>
+<TextField value={mobile} id="standard-basic"   onChange={e=>setMobile(e.target.value)}  label="Mobile #" /><br/>
+<TextField value={address} id="standard-basic"   onChange={e=>setAddress(e.target.value)}  label="Residencial Address" /><br/>
 <span className='img-preview-sp'>
-<TextField id="fileInput" onChange={HandleChange} label="Profile Image" type='file' />
+<TextField  id="fileInput" onChange={HandleChange} label="Profile Image" type='file' />
     <img src={img} id='img-preview' />
 
 </span>
@@ -150,11 +169,11 @@ firebase.database().ref(`students/${id}/resume`).push(resume)
 <Paper style={{width:433.33,height:520,overflow:'auto'}} elevation={3} > 
 <Typography style={{marginTop:10}}>Qualification </Typography>
 
-<TextField id="standard-basic" onChange={e=>setCollege(e.target.value)} label="Last School/College" />
-<TextField id="standard-basic"  onChange={e=>setLastDegree(e.target.value)} label="Last Degree/Certification" />
-<TextField id="standard-basic"  onChange={e=>setIssueDate(e.target.value)} type='date' label="Issue Date" />
-<TextField   className='extraSkills' onChange={e=>setExtraSkills(e.target.value)} label="Extra Skills"   variant="outlined"    rows={8}   />
-<TextField id="standard-basic"  onChange={e=>setEduJourney(e.target.value)} label="Share Your Educational Jouney" />
+<TextField value={lastCollege} id="standard-basic" onChange={e=>setCollege(e.target.value)} label="Last School/College" />
+<TextField value={lastDegree} id="standard-basic"  onChange={e=>setLastDegree(e.target.value)} label="Last Degree/Certification" />
+<TextField value={issueDate} id="standard-basic"  onChange={e=>setIssueDate(e.target.value)} type='date' label="Issue Date" />
+<TextField value={extraSkills}   className='extraSkills' onChange={e=>setExtraSkills(e.target.value)} label="Extra Skills"   variant="outlined"    rows={8}   />
+<TextField value={eduJourney} id="standard-basic"  onChange={e=>setEduJourney(e.target.value)} label="Share Your Educational Jouney" />
 
 
 
@@ -167,15 +186,15 @@ firebase.database().ref(`students/${id}/resume`).push(resume)
 </div>
 <Paper style={{width:433.33,height:570,overflow:'auto'}} elevation={3} > 
 <Typography style={{marginTop:10}}>Experience </Typography>
-<TextField id="standard-basic"  onChange={e=>setLastJob(e.target.value)} label="Last Job/Internship" />
-<TextField id="standard-basic"  onChange={e=>setCompany(e.target.value)} label="Company Name" />
+<TextField value={lastJob} id="standard-basic"  onChange={e=>setLastJob(e.target.value)} label="Last Job/Internship" />
+<TextField value={company} id="standard-basic"  onChange={e=>setCompany(e.target.value)} label="Company Name" />
 
 
-<TextField id="standard-basic" onChange={e=>setStartDate(e.target.value)} type='date' label="start from" />
-<TextField id="standard-basic"  onChange={e=>setEndDate(e.target.value)} type='date' label="to" />
+<TextField value={startDate} id="standard-basic" onChange={e=>setStartDate(e.target.value)} type='date' label="start from" />
+<TextField value={endDate} id="standard-basic"  onChange={e=>setEndDate(e.target.value)} type='date' label="to" />
 
-<TextField   className='extraSkills' label="Your Duties" onChange={e=>setWorkingJourney(e.target.value)}  rows={8}      />
-<TextField id="standard-basic" onChange={e=>setResponsibilities(e.target.value)} label="Share Your Working Jouney" />
+<TextField value={responsibilities}   className='extraSkills' label="Your Duties" onChange={e=>setWorkingJourney(e.target.value)}  rows={8}      />
+<TextField value={workingJourney} id="standard-basic" onChange={e=>setResponsibilities(e.target.value)} label="Share Your Working Jouney" />
 </Paper>
 </span>
 

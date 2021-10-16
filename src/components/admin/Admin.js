@@ -3,8 +3,8 @@ import {Link,BrowserRouter as Router, Route, Switch,useHistory}  from 'react-rou
 import {Card,CardContent,Button,Typography,Paper }  from '@material-ui/core'
 import './admin.css'
 import StdApplied from './StdApplied'
-import StdReject from './StdReject'
-import StdHire from './StdHire'
+
+// import CompanyNotifications from './StdHire'
 import StdResumes from './StdResumes'
 import StdPost from './StdPost'
 import img from '../images/img1.jpg'
@@ -29,9 +29,7 @@ const history=useHistory()
 
     </div>
     <div style={{marginTop:20}} >
-        <Button fullWidth variant='contained' color='primary'>
-            <Link style={{color:'white',textDecoration:'none'}} to='/admin/allStud' >All Students</Link>
-        </Button><br/><br/>
+        
         <Button fullWidth variant='contained' color='primary'>
             <Link style={{color:'white',textDecoration:'none'}} to='/admin/stdApplied' >Students Applied</Link>
         </Button><br/><br/>
@@ -41,12 +39,10 @@ const history=useHistory()
         <Button fullWidth variant='contained' color='primary'>
             <Link style={{color:'white',textDecoration:'none'}} to='/admin/stdPost' >Company Job Post</Link>
         </Button><br/><br/>
-        <Button fullWidth variant='contained' color='primary'>
-            <Link style={{color:'white',textDecoration:'none'}} to='/admin/stdHire' >Company Hire</Link>
-        </Button><br/><br/>
-        <Button fullWidth variant='contained' color='primary'>
-            <Link style={{color:'white',textDecoration:'none'}} to='/admin/stdReject' >Company Reject</Link>
-        </Button><br/>
+        {/* <Button fullWidth variant='contained' color='primary'>
+            <Link style={{color:'white',textDecoration:'none'}} to='/admin/companyDecisions' >Company Decision</Link>
+        </Button><br/><br/> */}
+  
 
     </div>
     </CardContent>
@@ -55,12 +51,13 @@ const history=useHistory()
     <CardContent>
      
         <Switch>
-            <Route exact path='/admin/allStud' component={StdApplied} />
+          
            
             <Route path='/admin/stdApplied' component={StdApplied} />
-            <Route path='/admin/stdHire' component={StdHire} />
-            {/* <Route path='/admin/stdReject' component={StdRejects} /> */}
+        
+
             <Route path='/admin/stdPost' component={StdPost} />
+       
             <Route path='/admin/stdResumes' component={StdResumes} />
 
         </Switch>
